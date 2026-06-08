@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sound Swipe — Stage H Sound Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell" aria-live="polite">
+    <section class="screen active" id="homeScreen">
+      <header class="home-header">
+        <div class="avatar" aria-hidden="true">Aa</div>
+        <button class="icon-button" id="openInfo" aria-label="Open info screen">?</button>
+      </header>
+
+      <div class="brand-block">
+        <h1>Sound Swipe <span class="sound-mark">)))</span></h1>
+        <p>Match spelling to sound</p>
+      </div>
+
+      <section class="lesson-list" aria-label="Lessons" id="lessonList"></section>
+
+      <section class="progress-card">
+        <div class="progress-topline">
+          <strong>Selected lesson progress</strong>
+          <button id="resetProgress" class="link-button">Reset</button>
+        </div>
+        <div class="mini-copy" id="homeLessonMeta">Choose a lesson</div>
+        <div class="progress-track"><div id="homeProgress" class="progress-fill"></div></div>
+        <div class="stat-row">
+          <div><span id="statCorrect">0</span><small>Best correct</small></div>
+          <div><span id="statAttempted">0</span><small>Attempted</small></div>
+          <div><span id="statAccuracy">0%</span><small>Accuracy</small></div>
+        </div>
+      </section>
+    </section>
+
+
+    <section class="screen" id="infoScreen">
+      <header class="info-header">
+        <button class="icon-button" id="closeInfo" aria-label="Back home">‹</button>
+        <h2>How Sound Swipe works</h2>
+        <span class="header-spacer" aria-hidden="true"></span>
+      </header>
+
+      <section class="info-card hero-info">
+        <h3>Why this app exists</h3>
+        <p>English spelling is weird. Sometimes words do not sound the way they look.</p>
+        <p>Even if you know the correct English sounds, it can still be hard to know where to use them. The letter <strong>C</strong> can sound like <strong>/k/</strong> in <em>cat</em>, but <strong>/s/</strong> in <em>city</em>. The letters <strong>CH</strong> can sound like <strong>/tʃ/</strong> in <em>chair</em>, <strong>/k/</strong> in <em>school</em>, or <strong>/ʃ/</strong> in <em>machine</em>.</p>
+        <p>These quizzes train your spelling-to-sound awareness. You are not just memorizing rules. You are building the instinct to look at a word and feel which sound belongs there.</p>
+        <p>With enough practice, you will start to recognize the sound by the pattern, the position, and the vibe of the word, even when the rule is not obvious.</p>
+      </section>
+
+      <section class="info-card">
+        <h3>IPA symbols</h3>
+        <p>This app uses IPA symbols. IPA is a writing system for sounds.</p>
+        <p>Always tap the speaker buttons when you enter a lesson. Some symbols may look familiar, but mean something different.</p>
+        <p>For example, <strong>/j/</strong> does not mean the J sound in <em>joke</em>. In IPA, <strong>/j/</strong> is the Y sound in <em>yes</em>.</p>
+        <p>So when in doubt: tap, listen, then answer.</p>
+      </section>
+
+      <section class="info-card">
+        <h3>How to answer</h3>
+        <div class="controls-strip">
+          <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span>
+          <small>Number keys choose answers.</small>
+        </div>
+        <div class="controls-strip">
+          <span>←</span><span>→</span>
+          <small>Arrow keys work in two-choice lessons.</small>
+        </div>
+        <div class="controls-strip">
+          <span>Drag</span>
+          <small>Drag the word card toward an answer choice.</small>
+        </div>
+        <div class="controls-strip">
+          <span>Space</span>
+          <small>After you answer, Spacebar continues.</small>
+        </div>
+      </section>
+    </section>
+
+    <section class="screen" id="quizScreen">
+      <header class="quiz-header">
+        <button class="icon-button" id="exitQuiz" aria-label="Exit quiz">×</button>
+        <div class="quiz-progress-wrap">
+          <div id="questionCount" class="question-count">1 of 20</div>
+          <div class="progress-track small"><div id="quizProgress" class="progress-fill"></div></div>
+        </div>
+        <div class="hearts" aria-label="Current streak">♥ <span id="streakCount">0</span></div>
+      </header>
+
+      <section class="prompt-block">
+        <h2 id="quizPrompt">What sound does the highlighted letter make?</h2>
+      </section>
+
+      <section class="card-stage" aria-label="Word card area">
+        <div id="wordCard" class="word-card" tabindex="0" role="button" aria-label="Current word card. Drag, click an answer, or use the keyboard.">
+          <div id="wordText" class="word-text"></div>
+        </div>
+        <section id="feedback" class="feedback-overlay" hidden>
+          <div class="feedback-pill" id="feedbackPill">
+            <p id="feedbackText"></p>
+            <button id="nextCard" class="primary-button compact">Next <span>→</span></button>
+            </div>
+        </section>
+      </section>
+
+      <section class="answer-zone" aria-label="Answer choices" id="answerZone"></section>
+    </section>
+
+    <section class="screen" id="completeScreen">
+      <div class="complete-card">
+        <div class="completion-icon">✓</div>
+        <h2>Lesson complete</h2>
+        <p id="finalScore">You scored 0 out of 20.</p>
+        <div class="final-grid">
+          <div><span id="finalAccuracy">0%</span><small>Accuracy</small></div>
+          <div><span id="finalStreak">0</span><small>Best streak</small></div>
+          <div><span id="finalMisses">0</span><small>Misses</small></div>
+        </div>
+        <section class="review-panel">
+          <h3>Practice these more</h3>
+          <div id="practiceMoreList" class="review-list"></div>
+        </section>
+        <section class="rule-panel" id="rulePanel" hidden>
+          <h3>Pattern you just trained</h3>
+          <p class="rule-strength" id="ruleStrength"></p>
+          <div id="ruleLines" class="rule-lines"></div>
+        </section>
+        <button class="primary-button" id="practiceAgain">Practice again <span>↻</span></button>
+        <button class="secondary-button" id="backHome">Back home</button>
+      </div>
+    </section>
+
+    <section class="confirm-overlay" id="leaveConfirm" hidden aria-modal="true" role="dialog" aria-labelledby="leaveTitle">
+      <div class="confirm-card">
+        <h2 id="leaveTitle">Do you want to leave?</h2>
+        <p>This lesson's data will be lost, but you can always start again.</p>
+        <div class="confirm-actions">
+          <button class="secondary-button compact-action" id="stayInLesson">Stay</button>
+          <button class="danger-button compact-action" id="confirmLeave">Leave lesson</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="lessons.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
